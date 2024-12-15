@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try Again</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: "Edwardian Script ITC", cursive;
+            background-color: #e3cebf;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 100%;
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* Message Styles */
+        .message p {
+            font-size: 80px;
+            color: #333;
+            margin-bottom: 50px;
+        }
+
+        /* Toggle Button Styles */
+        button {
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        /* Pink "Yes" Button */
+        .yes {
+            background-color: #f4d9db;
+            color: white;
+            border-radius: 25px;
+            padding: 30px 60px;
+            font-size: 60px;
+        }
+
+        /* Pink "No" Button */
+        .no {
+            background-color: #f4d9db;
+            color: white;
+            border-radius: 25px;
+            padding: 5px 15px;
+            font-size: 16px;
+        }
+
+        /* Heart Animation Styles */
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #f4d9db;
+            clip-path: polygon(50% 0%, 100% 25%, 75% 100%, 25% 100%, 0% 25%);
+            animation: fall 3s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hidden Text */
+        .love-message {
+            display: none;
+            font-size: 50px;
+            color: #ff69b4;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message">
+            <p>I didn’t want things to end up this way. I really want to try again with you, and I believe there must be a chance for things to work.</p>
+        </div>
+        <div class="toggles">
+            <button class="yes" onclick="showHearts()">Yes</button>
+            <button class="no" onclick="shrinkNo()">No</button>
+        </div>
+        <div class="love-message" id="love-message">YAY LOVE YOU POOKIE!</div>
+    </div>
+
+    <script>
+        // Function to show hearts and love message
+        function showHearts() {
+            const loveMessage = document.getElementById("love-message");
+            loveMessage.style.display = "block";
+
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+                document.body.appendChild(heart);
+
+                // Remove heart after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        }
+
+        // Function to shrink "No" button
+        function shrinkNo() {
+            const noButton = document.querySelector(".no");
+            const yesButton = document.querySelector(".yes");
+
+            if (noButton.style.display !== "none") {
+                noButton.style.transform = "scale(0.5)";
+                yesButton.style.transform = "scale(1.2)";
+
+                setTimeout(() => {
+                    noButton.style.transform = "scale(0.3)";
+                    yesButton.style.transform = "scale(1.5)";
+                }, 500);
+
+                setTimeout(() => {
+                    noButton.style.display = "none";
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
